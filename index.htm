@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en-us" ng-app="accordionApp">
+    <head>
+        <title>AngularJS Accordion Control</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta charset="UTF-8">
+        
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="style.css" />
+        
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.js"></script>
+        <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.2.js"></script>
+        <script src="app.js"></script>
+    </head>
+
+    <body>
+        <header>
+			<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/">AngularJS Accordion Control</a>
+				</div>
+			</div>
+			</nav>
+		</header>
+
+        <div class="container" ng-controller="accordionController">
+
+            <div ng-init="accordion=1">
+                <h3 class="accordion" ng-class="{active:accordion==1}">
+                    <a href ng-click="accordion = 1">Section 1</a>
+                </h3>
+                <p class="accordion-content" ng-show="accordion==1">Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using</p>
+                    
+                <h3 class="accordion" ng-class="{active:accordion==2}">
+                    <a href ng-click="accordion = 2">Section 2</a>
+                </h3>
+                <p class="accordion-content" ng-show="accordion==2">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using</p>
+                    
+                <h3 class="accordion" ng-class="{active:accordion==3}">
+                    <a href ng-click="accordion = 3">Section 3</a>
+                </h3>
+                <p class="accordion-content" ng-show="accordion==3">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form</p>
+            </div>
+
+            <br/><br/><br/>
+
+            <div>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" ng-model="oneAtATime">
+                      Open only one at a time
+                    </label>
+                </div>
+                <uib-accordion close-others="oneAtATime">
+                    <uib-accordion-group heading="{{group.title}}" ng-repeat="group in groups">
+                      {{group.content}}
+                    </uib-accordion-group>
+                    <uib-accordion-group heading="Dynamic Body Content">
+                      <button type="button" class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
+                      <div ng-repeat="item in list">{{item}}</div>
+                    </uib-accordion-group>
+                    <uib-accordion-group is-open="status.open">
+                      <uib-accordion-heading>
+                        I can have markup, too! <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                      </uib-accordion-heading>
+                      This is just some content to illustrate fancy headings.
+                    </uib-accordion-group>
+                </uib-accordion>
+            </div>
+
+            <br/><br/><br/>
+
+            <div>
+                <accordion-control>
+                    <h5 class="accHeading">Heading1</h5>
+                    <div class="accBody">Body1</div>
+                    
+                    <h5 class="accHeading">Heading2</h5>
+                    <div class="accBody">Body2</div>
+                    
+                    <h5 class="accHeading">Heading3</h5>
+                    <div class="accBody">Body3</div>
+               </accordion-control>
+            </div>
+
+            <br/><br/><br/>
+
+            <accordion-controls>        
+                <expander-list ng-repeat="item in items" title="{{ item.title }}">{{ item.content }}</expander-list>
+            </accordion-controls>
+
+        </div>
+
+    </body>
+</html>
